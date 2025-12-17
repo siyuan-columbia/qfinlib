@@ -1,0 +1,2 @@
+"""Discount curve factory."""
+

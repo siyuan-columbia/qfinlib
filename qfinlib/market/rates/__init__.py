@@ -1,0 +1,2 @@
+"""Rates module."""
+

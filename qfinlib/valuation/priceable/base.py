@@ -1,0 +1,2 @@
+"""Priceable base class."""
+

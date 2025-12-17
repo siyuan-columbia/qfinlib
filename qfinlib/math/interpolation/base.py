@@ -1,0 +1,2 @@
+"""Interpolator base class."""
+

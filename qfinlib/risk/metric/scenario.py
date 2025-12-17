@@ -1,0 +1,2 @@
+"""Scenario analysis metric."""
+

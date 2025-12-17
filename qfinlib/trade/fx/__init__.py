@@ -1,0 +1,2 @@
+"""FX trade module."""
+

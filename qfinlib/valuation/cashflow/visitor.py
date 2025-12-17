@@ -1,0 +1,2 @@
+"""Cashflow visitor pattern."""
+

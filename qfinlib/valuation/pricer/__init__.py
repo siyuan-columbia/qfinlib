@@ -1,0 +1,2 @@
+"""Pricer module."""
+

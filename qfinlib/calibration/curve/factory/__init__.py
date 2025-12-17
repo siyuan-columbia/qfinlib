@@ -1,0 +1,2 @@
+"""Curve factory module."""
+

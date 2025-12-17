@@ -1,0 +1,2 @@
+"""Fixed rate bond."""
+

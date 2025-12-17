@@ -1,0 +1,2 @@
+"""Risk result class."""
+
