@@ -1,2 +1,1 @@
 """FX spot rates."""
-

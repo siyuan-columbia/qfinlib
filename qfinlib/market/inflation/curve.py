@@ -1,2 +1,1 @@
 """Inflation curve."""
-

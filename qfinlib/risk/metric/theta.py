@@ -1,2 +1,1 @@
 """Theta metric."""
-

@@ -1,2 +1,1 @@
 """Priceable module."""
-

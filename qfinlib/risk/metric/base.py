@@ -1,2 +1,1 @@
 """Base risk metric class."""
-

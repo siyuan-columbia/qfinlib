@@ -1,2 +1,1 @@
 """Interpolation module."""
-

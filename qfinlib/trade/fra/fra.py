@@ -1,2 +1,1 @@
 """Forward rate agreement."""
-

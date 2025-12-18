@@ -1,2 +1,1 @@
 """Linear interpolation."""
-

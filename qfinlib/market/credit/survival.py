@@ -1,2 +1,1 @@
 """Survival probability curves."""
-

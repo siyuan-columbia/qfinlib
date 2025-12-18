@@ -33,6 +33,18 @@ import qfinlib as qf
 
 See the `docs/` directory for detailed documentation and tutorials.
 
+## Development
+
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for development guidelines.
+
+## CI/CD
+
+This project uses GitHub Actions for continuous integration and deployment:
+- Tests run automatically on pull requests
+- Package is automatically published to PyPI when merged to `main`
+
+See [.github/CI_SETUP.md](.github/CI_SETUP.md) for CI/CD setup instructions.
+
 ## License
 
 MIT License

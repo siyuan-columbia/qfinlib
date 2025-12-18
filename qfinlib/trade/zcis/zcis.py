@@ -1,2 +1,1 @@
 """Zero coupon inflation swap."""
-

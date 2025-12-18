@@ -38,4 +38,3 @@ setup(
         "Topic :: Office/Business :: Financial",
     ],
 )
-

@@ -1,2 +1,1 @@
 """Risk result class."""
-

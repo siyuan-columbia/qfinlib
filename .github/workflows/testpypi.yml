@@ -1,0 +1,61 @@
+name: Publish to TestPyPI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (leave empty for current version)'
+        required: false
+        type: string
+
+jobs:
+  publish-testpypi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Update version if provided
+        if: github.event.inputs.version != ''
+        run: |
+          poetry version ${{ github.event.inputs.version }}
+          # Also update __init__.py
+          sed -i "s/__version__ = \".*\"/__version__ = \"${{ github.event.inputs.version }}\"/" qfinlib/__init__.py
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Build package
+        run: poetry build
+
+      - name: Publish to TestPyPI
+        env:
+          POETRY_PYPI_TOKEN_TESTPYPI: ${{ secrets.TESTPYPI_API_TOKEN }}
+        run: |
+          if [ -z "$POETRY_PYPI_TOKEN_TESTPYPI" ]; then
+            echo "Error: TESTPYPI_API_TOKEN secret not set."
+            exit 1
+          fi
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+          poetry config pypi-token.testpypi $POETRY_PYPI_TOKEN_TESTPYPI
+          poetry publish --repository testpypi --no-interaction
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-testpypi
+          path: dist/
+          retention-days: 7
+

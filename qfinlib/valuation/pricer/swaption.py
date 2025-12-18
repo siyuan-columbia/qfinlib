@@ -1,2 +1,1 @@
 """Swaption pricer."""
-

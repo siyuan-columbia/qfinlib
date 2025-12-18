@@ -1,2 +1,1 @@
 """Risk scenario module."""
-
