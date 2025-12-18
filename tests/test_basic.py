@@ -14,4 +14,3 @@ def test_version():
     assert qfinlib.__version__ is not None
     assert isinstance(qfinlib.__version__, str)
     assert len(qfinlib.__version__) > 0
-
