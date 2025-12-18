@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +52,7 @@ jobs:
         run: poetry run mypy qfinlib || true
 
       - name: Run tests
-        run: poetry run pytest --cov=qfinlib --cov-report=xml --cov-report=term
+        run: poetry run pytest --cov=qfinlib --cov-report=xml --cov-report=term -v
 
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.11'
