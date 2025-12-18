@@ -1,2 +1,1 @@
 """Newton-Raphson solver."""
-

@@ -1,2 +1,1 @@
 """Normal distribution utilities."""
-

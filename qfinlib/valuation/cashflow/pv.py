@@ -1,2 +1,1 @@
 """Cashflow present value calculation."""
-

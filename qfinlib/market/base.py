@@ -1,2 +1,1 @@
 """MarketObject, MarketObjectData base classes."""
-

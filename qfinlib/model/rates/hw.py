@@ -1,2 +1,1 @@
 """Hull-White model."""
-

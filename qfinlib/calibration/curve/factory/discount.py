@@ -1,2 +1,1 @@
 """Discount curve factory."""
-

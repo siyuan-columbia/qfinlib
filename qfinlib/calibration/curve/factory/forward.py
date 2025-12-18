@@ -1,2 +1,1 @@
 """Forward curve factory."""
-

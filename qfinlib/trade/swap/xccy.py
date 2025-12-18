@@ -1,2 +1,1 @@
 """Cross-currency swap."""
-

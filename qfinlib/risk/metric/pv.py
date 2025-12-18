@@ -1,2 +1,1 @@
 """Present value metric."""
-

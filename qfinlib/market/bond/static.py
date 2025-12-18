@@ -1,2 +1,1 @@
 """Static bond market data."""
-

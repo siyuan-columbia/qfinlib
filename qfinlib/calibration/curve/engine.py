@@ -1,2 +1,1 @@
 """Curve calibration engine."""
-

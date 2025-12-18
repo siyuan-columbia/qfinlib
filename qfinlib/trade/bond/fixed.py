@@ -1,2 +1,1 @@
 """Fixed rate bond."""
-

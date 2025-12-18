@@ -1,2 +1,1 @@
 """Floating rate bond."""
-

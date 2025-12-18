@@ -1,2 +1,1 @@
 """Spread curve."""
-

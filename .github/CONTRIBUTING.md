@@ -33,16 +33,30 @@ Thank you for your interest in contributing to qfinlib!
    git checkout -b feature/your-feature-name
    ```
 
-2. **Make your changes** and ensure:
-   - Code follows the project style (black, flake8)
-   - Tests pass: `poetry run pytest`
-   - Type checking passes: `poetry run mypy qfinlib`
+2. **Make your changes**
 
-3. **Commit your changes**:
+3. **Run pre-commit checks** (IMPORTANT - prevents CI failures):
+   ```bash
+   # Windows
+   pre-commit.bat
+   
+   # Unix/Mac/Linux
+   ./pre-commit.sh
+   ```
+   
+   This will:
+   - Auto-format code with black
+   - Check code style with flake8
+   - Check types with mypy
+   - Run tests
+
+4. **Commit your changes**:
    ```bash
    git add .
    git commit -m "Description of changes"
    ```
+   
+   **Note**: If you set up git hooks (see `SETUP_GIT_HOOKS.md`), checks run automatically.
 
 4. **Push and create a Pull Request**:
    ```bash
@@ -55,11 +69,21 @@ Thank you for your interest in contributing to qfinlib!
 - **Linting**: We use `flake8`
 - **Type checking**: We use `mypy`
 
-Run before committing:
+**Easiest way**: Run the pre-commit script before committing:
+```bash
+# Windows
+pre-commit.bat
+
+# Unix/Mac/Linux
+./pre-commit.sh
+```
+
+Or manually:
 ```bash
 poetry run black .
 poetry run flake8 qfinlib tests
 poetry run mypy qfinlib
+poetry run pytest
 ```
 
 ## Testing

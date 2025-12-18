@@ -1,2 +1,1 @@
 """Yield calculation."""
-

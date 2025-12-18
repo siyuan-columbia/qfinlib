@@ -1,2 +1,1 @@
 """Log-linear interpolation."""
-

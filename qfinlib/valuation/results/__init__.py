@@ -1,2 +1,1 @@
 """Valuation results module."""
-

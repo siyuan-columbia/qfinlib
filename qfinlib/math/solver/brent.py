@@ -1,2 +1,1 @@
 """Brent's method solver."""
-

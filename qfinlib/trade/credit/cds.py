@@ -1,2 +1,1 @@
 """Credit default swap."""
-

@@ -1,2 +1,1 @@
 """Risk analytics module."""
-
