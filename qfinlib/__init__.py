@@ -1,6 +1,6 @@
 """qfinlib - A comprehensive quantitative finance library for hedge fund portfolio management."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Core modules - import at package level
 try:
