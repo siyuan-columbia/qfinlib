@@ -1,5 +1,5 @@
-"""Core infrastructure modules."""
+"""Core infrastructure modules (compatibility namespace)."""
 
-from qfinlib.core import date, math, utils
+from qfinlib import date, math, utils
 
 __all__ = ["date", "math", "utils"]
