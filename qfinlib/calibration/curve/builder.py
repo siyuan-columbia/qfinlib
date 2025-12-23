@@ -2,7 +2,7 @@
 
 from typing import Optional, List, Any
 from datetime import date
-from qfinlib.market.curves import DiscountCurve, ForwardCurve
+from qfinlib.market.curve import DiscountCurve, ForwardCurve
 from qfinlib.market.container import MarketContainer
 
 # Try to import engine, but make it optional

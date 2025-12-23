@@ -2,7 +2,7 @@
 
 from typing import Optional
 from datetime import date
-from qfinlib.market.curves.forward import ForwardCurve
+from qfinlib.market.curve.forward import ForwardCurve
 
 
 def calculate_slope(

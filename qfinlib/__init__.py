@@ -2,73 +2,43 @@
 
 __version__ = "0.2.0"
 
-# Core modules - import at package level
-try:
-    from qfinlib import core
-    from qfinlib.core import date, math, utils
-except ImportError:
-    pass
+# Core modules
+from qfinlib import date, math, utils
 
 # Market data
-try:
-    from qfinlib import market
-    from qfinlib.market.container import MarketContainer
-except ImportError:
-    pass
+from qfinlib import market
+from qfinlib.market.container import MarketContainer
 
 # Calibration
-try:
-    from qfinlib import calibration
-    from qfinlib.calibration.curve.builder import CurveBuilder
-except ImportError:
-    pass
+from qfinlib import calibration
+from qfinlib.calibration.curve.builder import CurveBuilder
 
 # Instruments
-try:
-    from qfinlib import instruments
-except ImportError:
-    pass
+from qfinlib import instruments
 
 # Pricing
-try:
-    from qfinlib import pricing
-    from qfinlib.pricing.engine import PricingEngine
-except ImportError:
-    pass
+from qfinlib import pricing
+from qfinlib.pricing.engine import PricingEngine
 
 # Risk
-try:
-    from qfinlib import risk
-    from qfinlib.risk.calculator import RiskCalculator
-except ImportError:
-    pass
+from qfinlib import risk
+from qfinlib.risk.calculator import RiskCalculator
 
 # Monitoring
-try:
-    from qfinlib import monitoring
-    from qfinlib.monitoring.scanner import Scanner
-except ImportError:
-    pass
+from qfinlib import monitoring
+from qfinlib.monitoring.scanner import Scanner
 
 # Portfolio
-try:
-    from qfinlib import portfolio
-    from qfinlib.portfolio.portfolio import Portfolio
-    from qfinlib.portfolio.position import Position
-except ImportError:
-    pass
+from qfinlib import portfolio
+from qfinlib.portfolio.portfolio import Portfolio
+from qfinlib.portfolio.position import Position
 
 # Strategy
-try:
-    from qfinlib import strategy
-    from qfinlib.strategy.generator import StrategyGenerator
-except ImportError:
-    pass
+from qfinlib import strategy
+from qfinlib.strategy.generator import StrategyGenerator
 
 __all__ = [
     "__version__",
-    # Core
-    "core",
     "date",
     "math",
     "utils",
