@@ -25,20 +25,13 @@ class RiskCalculator:
         return 0.0
 
     def scenario_analysis(
-        self,
-        instrument: Instrument,
-        shifts: List[int],
-        as_of: Optional[date] = None
+        self, instrument: Instrument, shifts: List[int], as_of: Optional[date] = None
     ) -> dict[str, Any]:
         """Perform scenario analysis."""
         # Placeholder - actual implementation would run scenarios
         return {}
 
-    def portfolio_risk(
-        self,
-        portfolio: Portfolio,
-        as_of: Optional[date] = None
-    ) -> dict[str, Any]:
+    def portfolio_risk(self, portfolio: Portfolio, as_of: Optional[date] = None) -> dict[str, Any]:
         """Calculate portfolio-level risk."""
         # Placeholder - actual implementation would aggregate risks
         return {}

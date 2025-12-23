@@ -15,11 +15,7 @@ class PricingEngine:
         self.market = market
         self._pricers: dict[str, Pricer] = {}
 
-    def price(
-        self,
-        instrument: Instrument,
-        as_of: Optional[date] = None
-    ) -> Any:
+    def price(self, instrument: Instrument, as_of: Optional[date] = None) -> Any:
         """Price an instrument."""
         pricer = self._get_pricer(instrument)
         return pricer.price(instrument, self.market, as_of)
@@ -37,4 +33,5 @@ class PricingEngine:
         # This would map instrument types to pricers
         # Placeholder implementation
         from qfinlib.pricing.pricers.base import Pricer
+
         return Pricer()

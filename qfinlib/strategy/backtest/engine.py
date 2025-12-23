@@ -13,11 +13,7 @@ class BacktestEngine:
         self.start_date = start_date
         self.end_date = end_date
 
-    def run(
-        self,
-        strategy: callable,
-        initial_capital: float = 1000000.0
-    ) -> Dict[str, Any]:
+    def run(self, strategy: callable, initial_capital: float = 1000000.0) -> Dict[str, Any]:
         """Run a backtest."""
         # Placeholder - actual implementation would simulate trading
         return {

@@ -9,10 +9,6 @@ class Screen(ABC):
     """Base class for strategy screens."""
 
     @abstractmethod
-    def screen(
-        self,
-        market: MarketContainer,
-        **kwargs
-    ) -> List[Dict[str, Any]]:
+    def screen(self, market: MarketContainer, **kwargs) -> List[Dict[str, Any]]:
         """Screen market for opportunities."""
         pass

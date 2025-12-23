@@ -12,10 +12,7 @@ class Pricer(ABC):
 
     @abstractmethod
     def price(
-        self,
-        instrument: Instrument,
-        market: MarketContainer,
-        as_of: Optional[date] = None
+        self, instrument: Instrument, market: MarketContainer, as_of: Optional[date] = None
     ) -> Any:
         """Price an instrument."""
         pass

@@ -8,10 +8,7 @@ class Position:
     """Represents a position in an instrument."""
 
     def __init__(
-        self,
-        instrument: Instrument,
-        quantity: float = 1.0,
-        entry_price: Optional[float] = None
+        self, instrument: Instrument, quantity: float = 1.0, entry_price: Optional[float] = None
     ):
         """Initialize position."""
         self.instrument = instrument
