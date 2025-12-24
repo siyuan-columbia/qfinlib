@@ -2,6 +2,10 @@
 
 A comprehensive quantitative finance library for Python.
 
+## Disclaimer
+
+This repository contains personal, educational research only. It is not related to any professional role, employer, or investment activity. All material is based on public information.
+
 ## Overview
 
 qfinlib provides a complete toolkit for quantitative finance, including:
