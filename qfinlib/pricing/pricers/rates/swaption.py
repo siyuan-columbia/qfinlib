@@ -110,6 +110,15 @@ class SwaptionPricer(Pricer):
         vega *= annuity
         theta *= annuity
 
+        # Additional diagnostics
+        atm_vol = self._volatility(market, expiry, forward, forward)
+        sabr_parameters = {
+            "alpha": market.data.get("sabr_alpha"),
+            "beta": market.data.get("sabr_beta"),
+            "rho": market.data.get("sabr_rho"),
+            "nu": market.data.get("sabr_nu"),
+        }
+
         return {
             "pv": price,
             "delta": delta,
@@ -120,4 +129,8 @@ class SwaptionPricer(Pricer):
             "strike": strike,
             "volatility": vol,
             "annuity": annuity,
+            "implied_vol_at_strike": vol,
+            "implied_vol_atm": atm_vol,
+            "sabr_parameters": sabr_parameters,
+            "swap_metrics": swap_data,
         }

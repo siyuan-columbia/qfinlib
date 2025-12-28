@@ -1,3 +1,5 @@
 """Bond instruments."""
 
-__all__ = []
+from qfinlib.instruments.bond.bond import Bond
+
+__all__ = ["Bond"]

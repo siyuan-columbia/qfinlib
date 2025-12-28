@@ -1,6 +1,6 @@
 """Unified pricing engine."""
 
-from typing import Any, Optional
+from typing import Any, Optional, Type
 from datetime import date
 from qfinlib.market.container import MarketContainer
 from qfinlib.instruments.base import Instrument
@@ -30,8 +30,19 @@ class PricingEngine:
 
     def _create_pricer(self, instrument: Instrument) -> Pricer:
         """Create a pricer for an instrument type."""
-        # This would map instrument types to pricers
-        # Placeholder implementation
-        from qfinlib.pricing.pricers.base import Pricer
+        from qfinlib.instruments.bond.bond import Bond
+        from qfinlib.instruments.rates.swap.irs import Swap
+        from qfinlib.instruments.rates.option.swaption import Swaption
+        from qfinlib.pricing.pricers import BondPricer, SwapPricer, SwaptionPricer
 
-        return Pricer()
+        mapping: dict[Type[Instrument], Type[Pricer]] = {
+            Bond: BondPricer,
+            Swap: SwapPricer,
+            Swaption: SwaptionPricer,
+        }
+
+        for cls, pricer_cls in mapping.items():
+            if isinstance(instrument, cls):
+                return pricer_cls()
+
+        raise ValueError(f"No pricer registered for instrument type {type(instrument).__name__}")
