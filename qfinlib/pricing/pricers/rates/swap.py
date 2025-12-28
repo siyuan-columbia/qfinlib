@@ -56,10 +56,18 @@ class SwapPricer(Pricer):
             float_forward = self._forward_rate(market, float_leg.forward_curve)
             par_rate = float(float_forward + float_leg.spread)
 
+        fixed_rate = instrument.fixed_rate
+        swap_carry = par_rate - fixed_rate if fixed_rate is not None else 0.0
+        swap_roll_convexity = market.data.get("swap_roll_convexity_adjustment", 0.0)
+        convexity_adjustment_rate = market.data.get("convexity_adjustment_rate", 0.0)
+
         return {
             "pv": pv,
             "pay_leg_pv": pay_pv,
             "receive_leg_pv": receive_pv,
             "annuity": annuity,
             "par_rate": par_rate,
+            "swap_carry": swap_carry,
+            "swap_roll_convexity_adjustment": swap_roll_convexity,
+            "convexity_adjustment_rate": convexity_adjustment_rate,
         }

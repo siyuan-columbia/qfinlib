@@ -111,9 +111,6 @@ class SwaptionPricer(Pricer):
         theta *= annuity
 
         # Additional diagnostics
-        swap_carry = forward - (instrument.swap.fixed_rate or forward)
-        swap_roll_convexity = market.data.get("swap_roll_convexity_adjustment", 0.0)
-        convexity_adjustment_rate = market.data.get("convexity_adjustment_rate", 0.0)
         atm_vol = self._volatility(market, expiry, forward, forward)
         sabr_parameters = {
             "alpha": market.data.get("sabr_alpha"),
@@ -132,10 +129,8 @@ class SwaptionPricer(Pricer):
             "strike": strike,
             "volatility": vol,
             "annuity": annuity,
-            "swap_carry": swap_carry,
-            "swap_roll_convexity_adjustment": swap_roll_convexity,
-            "convexity_adjustment_rate": convexity_adjustment_rate,
             "implied_vol_at_strike": vol,
             "implied_vol_atm": atm_vol,
             "sabr_parameters": sabr_parameters,
+            "swap_metrics": swap_data,
         }
