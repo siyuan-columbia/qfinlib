@@ -1,30 +1,13 @@
 """Randomized market data provider for quick testing and examples."""
-
 from __future__ import annotations
 
-import math
 import random
 from datetime import date
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from qfinlib.market.container import MarketContainer
+from qfinlib.market.curve import DiscountCurve, ForwardCurve
 from qfinlib.market.data.provider import DataProvider
-
-
-class _FlatDiscountCurve:
-    def __init__(self, rate: float):
-        self.rate = float(rate)
-
-    def discount_factor(self, t: float) -> float:
-        return math.exp(-self.rate * float(t))
-
-
-class _FlatForwardCurve:
-    def __init__(self, forward: float):
-        self.forward = float(forward)
-
-    def forward_rate(self) -> float:
-        return self.forward
 
 
 class _ConstantVolSurface:
@@ -61,6 +44,62 @@ class RandomMarketDataProvider(DataProvider):
     def _draw_vol(self, low: float = 0.05, high: float = 0.50) -> float:
         return self.random.uniform(low, high)
 
+    def _flat_discount_curve(self, rate: float) -> DiscountCurve:
+        return DiscountCurve(pillars=[0.0, 30.0], zero_rates=[rate, rate])
+
+    def _flat_forward_curve(self, rate: float) -> ForwardCurve:
+        return ForwardCurve(pillars=[0.0, 30.0], forward_rates=[rate, rate], index=self.forward_curve_name)
+
+    @staticmethod
+    def _tenor_to_years(tenor: str) -> float:
+        units = tenor.strip().upper()
+        if units.endswith("Y"):
+            return float(units[:-1])
+        if units.endswith("M"):
+            return float(units[:-1]) / 12.0
+        if units.endswith("D"):
+            return float(units[:-1]) / 365.0
+        raise ValueError(f"Unrecognized tenor format: {tenor}")
+
+    def _swap_curve_profile(self, tenors: Sequence[str], rate_type: str) -> Tuple[List[float], List[str]]:
+        pillars: List[float] = []
+        names: List[str] = []
+        for tenor in tenors:
+            t = self._tenor_to_years(tenor)
+            pillars.append(round(t, 6))
+            names.append(f"USSWAP-{tenor.upper()}-{rate_type.upper()}")
+        return pillars, names
+
+    def generate_swap_curve(
+        self, tenors: Iterable[str], rate_type: str = "OTC", anchor_rate: Optional[float] = None
+    ) -> List[Dict[str, Any]]:
+        """Generate synthetic swap quotes aligned with supplied tenors and rate type."""
+
+        rate_floor = 0.005 if rate_type.lower() == "otc" else 0.0
+        rate_ceiling = 0.055 if rate_type.lower() == "otc" else 0.04
+        base_rate = anchor_rate if anchor_rate is not None else self._draw_rate(rate_floor, rate_ceiling)
+        slope = 0.003 if rate_type.lower() == "otc" else 0.002
+        volatility = 0.0009 if rate_type.lower() == "otc" else 0.0005
+
+        tenors_list = list(tenors)
+        pillars, names = self._swap_curve_profile(tenors_list, rate_type)
+        instruments: List[Dict[str, Any]] = []
+        for idx, (tenor, pillar, name) in enumerate(zip(tenors_list, pillars, names)):
+            drift = slope * pillar
+            jitter = self.random.uniform(-volatility, volatility)
+            quote = base_rate + drift + jitter
+            instruments.append(
+                {
+                    "pillar": pillar,
+                    "quote": quote,
+                    "instrument": name,
+                    "tenor": tenor.upper(),
+                    "rate_type": rate_type,
+                    "rank": idx,
+                }
+            )
+        return instruments
+
     def get_rates(self, currency: str, as_of: Optional[date] = None) -> Dict[str, Any]:
         as_of_date = self._as_of(as_of)
         discount_rate = self._draw_rate()
@@ -72,8 +111,8 @@ class RandomMarketDataProvider(DataProvider):
             "forward_curve_name": self.forward_curve_name,
             "discount_rate": discount_rate,
             "forward_rate": forward_rate,
-            "discount_curve": _FlatDiscountCurve(discount_rate),
-            "forward_curve": _FlatForwardCurve(forward_rate),
+            "discount_curve": self._flat_discount_curve(discount_rate),
+            "forward_curve": self._flat_forward_curve(forward_rate),
         }
 
     def get_bond_prices(self, bond_id: str, as_of: Optional[date] = None) -> Dict[str, Any]:
