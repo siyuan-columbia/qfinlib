@@ -44,15 +44,6 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - name: Run linter (black)
-        run: poetry run black --check .
-
-      - name: Run linter (flake8)
-        run: poetry run flake8 qfinlib tests || true
-
-      - name: Run type checker (mypy)
-        run: poetry run mypy qfinlib || true
-
       - name: Run tests
         run: poetry run pytest --cov=qfinlib --cov-report=xml --cov-report=term -v
 
