@@ -14,7 +14,7 @@ class LogLinearInterpolator(Interpolator):
         if any(value <= 0 for value in y):
             raise ValueError("Log-linear interpolation requires strictly positive y values")
         log_y = [math.log(val) for val in y]
-        linear = LinearLike(log_y, self.extrapolation)
+        linear = LinearLike(self.extrapolation)
         result = linear.interpolate(x, log_y, x_new)
         return math.exp(result)
 
